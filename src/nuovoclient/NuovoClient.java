@@ -14,6 +14,7 @@ import java.net.Socket;
 import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import static javafx.application.Application.launch;
 
 /**
  *
@@ -67,6 +68,11 @@ public class NuovoClient {
                     scrittore.println(password);
                     risposta = ricevi.readLine();
                     System.out.println(risposta);
+                    if (risposta.equals("enterAccount")) {
+                        Thread profiloClient = new Thread(new GestioneProfilo(server, nome));
+                        profiloClient.start();
+                    }
+
                     break;
                 case 3:
                     scrittore.println(p.secure());
@@ -78,6 +84,7 @@ public class NuovoClient {
             }
 
         } while (controllo != 5);
+        scrittore.println("exit");
         System.out.println("chiusura connessione");
         scrittore.close();
         ricevi.close();

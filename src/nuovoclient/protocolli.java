@@ -22,4 +22,9 @@ public class protocolli {
     public String secure() {
         return "secure";
     }
+
+    public String create() {
+        return "create";
+    }
+
 }
