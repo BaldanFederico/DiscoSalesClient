@@ -37,14 +37,22 @@ public class GestioneProfilo implements Runnable {
 
             PrintWriter scrittore = new PrintWriter(server.getOutputStream(), true);
             BufferedReader ricevi = new BufferedReader(new InputStreamReader(server.getInputStream()));
+            
+            
             do {
+               System.out.println("premi 1 per creare una nuova room");
+                controllo=sc.nextInt();
+                
                 switch (controllo) {
                     case 1:
-                       scrittore.println(p.create());
-                        RoomID = sc.next();
+                        scrittore.println(p.create());
+                        nomeRoom=sc.next();
                         owner = nomeU;
                         partecipante = owner;
-                       
+                        scrittore.println(RoomID);
+                        scrittore.println(owner);
+                        scrittore.println(partecipante);
+                        
                         break;
 
                 }
