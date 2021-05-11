@@ -30,33 +30,37 @@ public class GestioneProfilo implements Runnable {
     public void run() {
         protocolli p = new protocolli();
         Scanner sc = new Scanner(System.in);
-        String nomeRoom, owner, RoomID, partecipante;
+        String nomeRoom, RoomID, owner, partecipante;
         int controllo;
         String risposta;
         try {
 
             PrintWriter scrittore = new PrintWriter(server.getOutputStream(), true);
             BufferedReader ricevi = new BufferedReader(new InputStreamReader(server.getInputStream()));
-            
-            
+
             do {
-               System.out.println("premi 1 per creare una nuova room");
-                controllo=sc.nextInt();
-                
+                System.out.println("premi 1 per creare una nuova room");
+                controllo = sc.nextInt();
+
                 switch (controllo) {
                     case 1:
                         scrittore.println(p.create());
-                        nomeRoom=sc.next();
+                        nomeRoom = sc.next();
                         owner = nomeU;
                         partecipante = owner;
-                        scrittore.println(RoomID);
                         scrittore.println(owner);
                         scrittore.println(partecipante);
-                        
+
+                        break;
+                    case 2:
+                        System.out.println("inserisci l'id della room");
+                        RoomID = sc.next();
+                        scrittore.println(RoomID);
+
                         break;
 
                 }
-            } while ();
+            } while (controllo != 2);
 
         } catch (IOException ex) {
             System.out.println("hai rotto java");
