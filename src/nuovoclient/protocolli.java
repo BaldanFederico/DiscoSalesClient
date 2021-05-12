@@ -26,5 +26,9 @@ public class protocolli {
     public String create() {
         return "create";
     }
+  public String Search(){
+      return "search";
+  }
+
 
 }

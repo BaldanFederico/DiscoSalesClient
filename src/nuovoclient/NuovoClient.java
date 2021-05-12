@@ -46,14 +46,13 @@ public class NuovoClient {
                     scrittore.println(p.SignUp());
                     System.out.println("crea un nuovo nome utente");
                     nome = sc.next();
-
                     scrittore.println(nome);
                     System.out.println("crea una nuova password");
                     password = sc.next();
                     scrittore.println(password);
                     System.out.println("inserisci la tua mail");
                     Email = sc.next();
-
+                    u.setEmail(Email);
                     scrittore.println(Email);
                     risposta = ricevi.readLine();
                     System.out.println(risposta);
@@ -62,14 +61,16 @@ public class NuovoClient {
                     scrittore.println(p.log());
                     System.out.println("inserisci il tuo nome utente");
                     nome = sc.next();
+                    u.setNome(nome);
                     System.out.println("inserisci la password");
                     password = sc.next();
+                    u.setPassword(password);
                     scrittore.println(nome);
                     scrittore.println(password);
                     risposta = ricevi.readLine();
                     System.out.println(risposta);
                     if (risposta.equals("enterAccount")) {
-                        Thread profiloClient = new Thread(new GestioneProfilo(server, nome));
+                        Thread profiloClient = new Thread(new GestioneProfilo(server));
                         profiloClient.start();
                     }
 

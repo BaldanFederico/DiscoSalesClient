@@ -19,18 +19,19 @@ import java.util.Scanner;
 public class GestioneProfilo implements Runnable {
 
     Socket server;
-    String nomeU;
-
-    public GestioneProfilo(Socket server, String nomeU) {
+ 
+    
+    public GestioneProfilo(Socket server) {
         this.server = server;
-        this.nomeU = nomeU;
+       
     }
 
     @Override
     public void run() {
+        utente u=new utente();
         protocolli p = new protocolli();
         Scanner sc = new Scanner(System.in);
-        String nomeRoom, RoomID, owner, partecipante;
+        String nomeRoom, RoomID, owner, partecipante=u.getNome();
         int controllo;
         String risposta;
         try {
@@ -40,27 +41,39 @@ public class GestioneProfilo implements Runnable {
 
             do {
                 System.out.println("premi 1 per creare una nuova room");
+                
                 controllo = sc.nextInt();
 
                 switch (controllo) {
                     case 1:
                         scrittore.println(p.create());
+                        System.out.println("inserisci il nome della room");
                         nomeRoom = sc.next();
-                        owner = nomeU;
+                        owner = partecipante;
                         partecipante = owner;
                         scrittore.println(owner);
                         scrittore.println(partecipante);
 
                         break;
                     case 2:
+                        scrittore.println(p.Search());
                         System.out.println("inserisci l'id della room");
                         RoomID = sc.next();
                         scrittore.println(RoomID);
-
+                        risposta = ricevi.readLine();
+                        System.out.println(risposta);
+                        System.out.println("vuoi unirti(scrivi entr)");
+                        risposta = sc.next();
+                        scrittore.println(risposta);//manda la conferma
+                        while(risposta!=null){
+                        if(!risposta.equals("members")){
+                            
+                        }
+                      } 
                         break;
 
                 }
-            } while (controllo != 2);
+            } while (controllo != 3);
 
         } catch (IOException ex) {
             System.out.println("hai rotto java");
