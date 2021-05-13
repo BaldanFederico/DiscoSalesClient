@@ -28,8 +28,8 @@ public class GestioneProfilo implements Runnable {
 
     @Override
     public void run() {
-        utente u=new utente();
-        protocolli p = new protocolli();
+        Utente u=new Utente();
+        Protocolli p = new Protocolli();
         Scanner sc = new Scanner(System.in);
         String nomeRoom, RoomID, owner, partecipante=u.getNome();
         int controllo;

@@ -31,8 +31,8 @@ public class NuovoClient {
         Scanner sc = new Scanner(System.in);
         int controllo;
         String nome, password, Email, codice;
-        utente u = new utente();
-        protocolli p = new protocolli();
+        Utente u = new Utente();
+        Protocolli p = new Protocolli();
         PrintWriter scrittore = new PrintWriter(server.getOutputStream(), true);
         BufferedReader ricevi = new BufferedReader(new InputStreamReader(server.getInputStream()));
         String risposta;
