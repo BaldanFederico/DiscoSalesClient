@@ -28,7 +28,7 @@ public class GestioneProfilo implements Runnable {
 
     @Override
     public void run() {
-        Utente u=new Utente();
+        Utente u = new Utente();
         Protocolli p = new Protocolli();
         Scanner sc = new Scanner(System.in);
         String nomeRoom, RoomID, owner, partecipante=u.getNome();
@@ -56,7 +56,7 @@ public class GestioneProfilo implements Runnable {
 
                         break;
                     case 2:
-                        scrittore.println(p.Search());
+                        scrittore.println(p.search());
                         System.out.println("inserisci l'id della room");
                         RoomID = sc.next();
                         scrittore.println(RoomID);

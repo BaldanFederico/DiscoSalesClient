@@ -5,15 +5,9 @@
  */
 package nuovoclient;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.io.PrintWriter;
-import java.net.Socket;
-import java.util.Scanner;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import java.io.*;
+import java.net.*;
+import java.util.*;
 import static javafx.application.Application.launch;
 
 /**
@@ -30,7 +24,7 @@ public class NuovoClient {
         Socket server = new Socket("127.0.0.1", 6666);
         Scanner sc = new Scanner(System.in);
         int controllo;
-        String nome, password, Email, codice;
+        String nome, password, email, codice;
         Utente u = new Utente();
         Protocolli p = new Protocolli();
         PrintWriter scrittore = new PrintWriter(server.getOutputStream(), true);
@@ -43,7 +37,7 @@ public class NuovoClient {
             controllo = sc.nextInt();
             switch (controllo) {
                 case 1:
-                    scrittore.println(p.SignUp());
+                    scrittore.println(p.signUp());
                     System.out.println("crea un nuovo nome utente");
                     nome = sc.next();
                     scrittore.println(nome);
@@ -51,9 +45,9 @@ public class NuovoClient {
                     password = sc.next();
                     scrittore.println(password);
                     System.out.println("inserisci la tua mail");
-                    Email = sc.next();
-                    u.setEmail(Email);
-                    scrittore.println(Email);
+                    email = sc.next();
+                    u.setEmail(email);
+                    scrittore.println(email);
                     risposta = ricevi.readLine();
                     System.out.println(risposta);
                     break;
@@ -73,7 +67,6 @@ public class NuovoClient {
                         Thread profiloClient = new Thread(new GestioneProfilo(server));
                         profiloClient.start();
                     }
-
                     break;
                 case 3:
                     scrittore.println(p.secure());
@@ -83,13 +76,12 @@ public class NuovoClient {
                     risposta = ricevi.readLine();
                     System.out.println(risposta);
             }
-
         } while (controllo != 5);
+        
         scrittore.println("exit");
         System.out.println("chiusura connessione");
         scrittore.close();
         ricevi.close();
         server.close();
-
     }
 }

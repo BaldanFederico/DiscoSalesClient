@@ -13,13 +13,13 @@ public class Room {
 
     private String nomeRoom;
     private String owner;//un id univoco per ogni utente
-    private String RoomID; //un id univoco per la room
+    private String roomID; //un id univoco per la room
     private String partecipante;
 
     public Room(String nomeRoom, String owner, String RoomID, String partecipante) {
         this.nomeRoom = nomeRoom;
         this.owner = owner;
-        this.RoomID = RoomID;
+        this.roomID = RoomID;
         this.partecipante = partecipante;
     }
 
@@ -32,7 +32,7 @@ public class Room {
     }
 
     public String getRoomID() {
-        return RoomID;
+        return roomID;
     }
 
     public String getPartecipante() {
