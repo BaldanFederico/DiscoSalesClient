@@ -56,7 +56,7 @@ public class GestioneProfilo implements Runnable {
 
                         break;
                     case 2:
-                        scrittore.println(p.search());
+                        scrittore.println(p.Search());
                         System.out.println("inserisci l'id della room");
                         RoomID = sc.next();
                         scrittore.println(RoomID);
