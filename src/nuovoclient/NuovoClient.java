@@ -10,6 +10,11 @@ import java.net.*;
 import java.util.*;
 import static javafx.application.Application.launch;
 
+import java.io.*;
+import java.net.*;
+import java.util.*;
+import static javafx.application.Application.launch;
+
 /**
  *
  * @author dell
@@ -25,8 +30,8 @@ public class NuovoClient {
         Scanner sc = new Scanner(System.in);
         int controllo;
         String nome, password, email, codice;
-        Utente u = new Utente();
-        Protocolli p = new Protocolli();
+        Utente2 u = new Utente2();
+        Protocolli2 p = new Protocolli2();
         PrintWriter scrittore = new PrintWriter(server.getOutputStream(), true);
         BufferedReader ricevi = new BufferedReader(new InputStreamReader(server.getInputStream()));
         String risposta;
@@ -37,7 +42,7 @@ public class NuovoClient {
             controllo = sc.nextInt();
             switch (controllo) {
                 case 1:
-                    scrittore.println(p.signUp());
+                    scrittore.println(p.SignUp());
                     System.out.println("crea un nuovo nome utente");
                     nome = sc.next();
                     scrittore.println(nome);
@@ -64,8 +69,8 @@ public class NuovoClient {
                     risposta = ricevi.readLine();
                     System.out.println(risposta);
                     if (risposta.equals("enterAccount")) {
-                        Thread profiloClient = new Thread(new GestioneProfilo(server));
-                        profiloClient.start();
+                        GestioneProfilo pf = new GestioneProfilo(server);
+                        pf.gestisci();
                     }
                     break;
                 case 3:
