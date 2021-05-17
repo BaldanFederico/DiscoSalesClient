@@ -77,7 +77,7 @@ public class GestioneProfilo {
                         if (risposta.equals("entr")) {
                             scrittore.println(risposta);//manda la conferma
                             scrittore.println(partecipante);
-                            salva(nomeRoom, owner, partecipante);
+                            salva( partecipante);
                         }
                         break;
 
@@ -111,7 +111,7 @@ public class GestioneProfilo {
         f.delete();
     }
 
-    private void salva(String nomeRoom, String owner, String partecipante) throws IOException {
+    private void salva(String partecipante) throws IOException {
 
         BufferedReader ricevi = new BufferedReader(new InputStreamReader(server.getInputStream()));
 
