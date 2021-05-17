@@ -34,12 +34,12 @@ public class GestioneProfilo {
 
     }
 
-    public void gestisci() {
-        Utente2 u = new Utente2();
-        Protocolli2 p = new Protocolli2();
+ public void gestisci() {
+        utente u = new utente();
+        protocolli p = new protocolli();
 
         Scanner sc = new Scanner(System.in);
-        String RoomID, partecipante = u.getNome();
+        String nomeRoom, RoomID, owner, partecipante = u.getNome();
         int controllo;
         String risposta;
         try {
@@ -48,7 +48,7 @@ public class GestioneProfilo {
             BufferedReader ricevi = new BufferedReader(new InputStreamReader(server.getInputStream()));
             System.out.println("sei nella gestione profilo");
             scrittore.println(partecipante);
-            // salva(nomeRoom, owner, partecipante);
+           // salva(nomeRoom, owner, partecipante);
             do {
                 System.out.println("premi 1 per creare una nuova room");
                 System.out.println("premi 2 per cercare una room");
@@ -77,7 +77,7 @@ public class GestioneProfilo {
                         if (risposta.equals("entr")) {
                             scrittore.println(risposta);//manda la conferma
                             scrittore.println(partecipante);
-                            salva(partecipante);
+                            salva(nomeRoom, owner, partecipante);
                         }
                         break;
 
@@ -111,7 +111,7 @@ public class GestioneProfilo {
         f.delete();
     }
 
-    private void salva(String partecipante) throws IOException {
+    private void salva(String nomeRoom, String owner, String partecipante) throws IOException {
 
         BufferedReader ricevi = new BufferedReader(new InputStreamReader(server.getInputStream()));
 
@@ -131,4 +131,5 @@ public class GestioneProfilo {
             partecipante = ricevi.readLine();
         }
     }
+
 }
