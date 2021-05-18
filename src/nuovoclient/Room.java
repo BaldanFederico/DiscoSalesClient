@@ -39,4 +39,9 @@ public class Room {
         return partecipante;
     }
 
+    @Override
+    public String toString() {
+        return "Room{" + "nomeRoom=" + nomeRoom + ", owner=" + owner + ", roomID=" + roomID + ", partecipante=" + partecipante + '}';
+    }
+
 }

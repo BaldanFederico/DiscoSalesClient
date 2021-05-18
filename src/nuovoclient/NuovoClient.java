@@ -8,12 +8,12 @@ package nuovoclient;
 import java.io.*;
 import java.net.*;
 import java.util.*;
-import static javafx.application.Application.launch;
+
 
 import java.io.*;
 import java.net.*;
 import java.util.*;
-import static javafx.application.Application.launch;
+
 
 /**
  *

@@ -26,7 +26,7 @@ public class GestioneProfilo {
     private Vector<Room> room = new Vector();
     private String userName = System.getProperty("user.name");
     private String owner;
-    private String nomeRoom;
+    private String nomeRoom,RoomID;
     File f;
 
     public GestioneProfilo(Socket server) {
@@ -34,12 +34,12 @@ public class GestioneProfilo {
 
     }
 
- public void gestisci() {
-        utente u = new utente();
+    public void gestisci() {
+        Utente2 u = new Utente2();
         protocolli p = new protocolli();
-
+        System.out.println(u.getNome());
         Scanner sc = new Scanner(System.in);
-        String nomeRoom, RoomID, owner, partecipante = u.getNome();
+        String partecipante = u.getNome();
         int controllo;
         String risposta;
         try {
@@ -47,8 +47,8 @@ public class GestioneProfilo {
             PrintWriter scrittore = new PrintWriter(server.getOutputStream(), true);
             BufferedReader ricevi = new BufferedReader(new InputStreamReader(server.getInputStream()));
             System.out.println("sei nella gestione profilo");
-            scrittore.println(partecipante);
-           // salva(nomeRoom, owner, partecipante);
+            scrittore.println(partecipante); //manda il partecipante per ricevere tutte le caratteristiche 
+             salva( partecipante);
             do {
                 System.out.println("premi 1 per creare una nuova room");
                 System.out.println("premi 2 per cercare una room");
@@ -60,10 +60,13 @@ public class GestioneProfilo {
                         System.out.println("inserisci il nome della room");
                         nomeRoom = sc.next();
                         owner = partecipante;
-                        partecipante = owner;
                         scrittore.println(owner);
                         scrittore.println(partecipante);
-
+                        scrittore.println(nomeRoom);
+                        RoomID = ricevi.readLine();
+                        System.out.println("prova");
+                        room.add(new Room(nomeRoom, owner, RoomID, partecipante));
+                        writeRoom();
                         break;
                     case 2:
                         scrittore.println(p.Search());
@@ -71,18 +74,24 @@ public class GestioneProfilo {
                         RoomID = sc.next();
                         scrittore.println(RoomID);
                         risposta = ricevi.readLine();
-                        System.out.println(risposta);
+                        System.out.println(risposta); //questa room esiste o non
                         System.out.println("vuoi unirti(scrivi entr)");//verrà automaticamente generata
                         risposta = sc.next();
                         if (risposta.equals("entr")) {
                             scrittore.println(risposta);//manda la conferma
-                            scrittore.println(partecipante);
-                            salva( partecipante);
+                            scrittore.println(partecipante);//manda il nome utente
+                            salva(partecipante);
+                            writeRoom();
+                        }
+                        break;
+                    case 3:
+                        for (int i = 0; i < room.size(); i++) {
+                            System.out.println(room.get(i).toString());
                         }
                         break;
 
                 }
-            } while (controllo != 3);
+            } while (controllo != 4);
             cancella();
         } catch (IOException ex) {
             System.out.println("hai rotto java");
@@ -92,8 +101,8 @@ public class GestioneProfilo {
     private void writeRoom() throws IOException {  //serve tenere traccia dei vari delle room
 
         f = new File("C:\\Users\\" + userName + "\\Desktop\\Room.txt");
-        BufferedWriter bw = new BufferedWriter(new FileWriter(f));
         f.createNewFile();
+        BufferedWriter bw = new BufferedWriter(new FileWriter(f));
         for (int i = 0; i < room.size(); i++) {
             bw.write(room.get(i).getNomeRoom() + ";");
             bw.write(room.get(i).getOwner() + ";");
@@ -117,18 +126,34 @@ public class GestioneProfilo {
 
         nomeRoom = ricevi.readLine();
         owner = ricevi.readLine();
-        partecipante = ricevi.readLine();
+        partecipante = ricevi.readLine(); //riceve i partecipanti 
 
         while (!partecipante.equals(null)) {
 
-            if (!partecipante.equals("members")) {
-                room.add(new Room(nomeRoom, owner, null, partecipante));
+            room.add(new Room(nomeRoom, owner, RoomID, partecipante));
 
-                //  if (checkbox == true) {
-                writeRoom();
-                //  }
-            }
+            //  if (checkbox == true) {
+            writeRoom();
+            //  }
+
             partecipante = ricevi.readLine();
+        }
+    }
+
+    private void rimuoviUtente() throws IOException {
+        PrintWriter scrittore = new PrintWriter(server.getOutputStream(), true);
+        for (int i = 0; i < room.size(); i++) {
+            System.out.println(room.get(i).toString());
+        }
+        System.out.println("seleziona l'utente da rimuovere");
+
+    }
+
+    private void MandaMessaggio() {
+        for (int i = 0; i < room.size(); i++) {
+            //if () {
+
+            //}
         }
     }
 
