@@ -26,7 +26,7 @@ public class GestioneProfilo {
     private Vector<Room> room = new Vector();
     private String userName = System.getProperty("user.name");
     private String owner;
-    private String nomeRoom,RoomID;
+    private String nomeRoom, RoomID;
     File f;
 
     public GestioneProfilo(Socket server) {
@@ -37,9 +37,10 @@ public class GestioneProfilo {
     public void gestisci() {
         Utente2 u = new Utente2();
         protocolli p = new protocolli();
-        System.out.println(u.getNome());
+
         Scanner sc = new Scanner(System.in);
-        String partecipante = u.getNome();
+        String partecipante;
+        partecipante = u.getNome();
         int controllo;
         String risposta;
         try {
@@ -48,7 +49,7 @@ public class GestioneProfilo {
             BufferedReader ricevi = new BufferedReader(new InputStreamReader(server.getInputStream()));
             System.out.println("sei nella gestione profilo");
             scrittore.println(partecipante); //manda il partecipante per ricevere tutte le caratteristiche 
-             salva( partecipante);
+           // salva();//si deve vedere successivamente
             do {
                 System.out.println("premi 1 per creare una nuova room");
                 System.out.println("premi 2 per cercare una room");
@@ -80,7 +81,10 @@ public class GestioneProfilo {
                         if (risposta.equals("entr")) {
                             scrittore.println(risposta);//manda la conferma
                             scrittore.println(partecipante);//manda il nome utente
-                            salva(partecipante);
+                            nomeRoom = ricevi.readLine();//riceve il nome delle room di appartenenza
+                            owner = ricevi.readLine();//riceve il nome dell'owner
+                            room.add(new Room(nomeRoom, owner, RoomID, partecipante));
+                            salva();
                             writeRoom();
                         }
                         break;
@@ -88,7 +92,15 @@ public class GestioneProfilo {
                         for (int i = 0; i < room.size(); i++) {
                             System.out.println(room.get(i).toString());
                         }
+                    case 4:
+                        System.out.println("inserisci l'id della room");//verra inserito al click della casella
+                        RoomID = sc.next();
+                        scrittore.println(RoomID);
+                        
                         break;
+                        
+                        
+                       
 
                 }
             } while (controllo != 4);
@@ -120,12 +132,10 @@ public class GestioneProfilo {
         f.delete();
     }
 
-    private void salva(String partecipante) throws IOException {
-
+    private void salva() throws IOException {
+        String partecipante;
         BufferedReader ricevi = new BufferedReader(new InputStreamReader(server.getInputStream()));
 
-        nomeRoom = ricevi.readLine();
-        owner = ricevi.readLine();
         partecipante = ricevi.readLine(); //riceve i partecipanti 
 
         while (!partecipante.equals(null)) {
@@ -150,6 +160,7 @@ public class GestioneProfilo {
     }
 
     private void MandaMessaggio() {
+       
         for (int i = 0; i < room.size(); i++) {
             //if () {
 
