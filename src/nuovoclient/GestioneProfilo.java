@@ -103,7 +103,7 @@ public class GestioneProfilo {
                        
 
                 }
-            } while (controllo != 4);
+            } while (controllo != 5);
             cancella();
         } catch (IOException ex) {
             System.out.println("hai rotto java");
@@ -138,7 +138,7 @@ public class GestioneProfilo {
 
         partecipante = ricevi.readLine(); //riceve i partecipanti 
 
-        while (!partecipante.equals(null)) {
+        while (!partecipante.equals("stop")) {
 
             room.add(new Room(nomeRoom, owner, RoomID, partecipante));
 
