@@ -48,8 +48,9 @@ public class GestioneProfilo {
             PrintWriter scrittore = new PrintWriter(server.getOutputStream(), true);
             BufferedReader ricevi = new BufferedReader(new InputStreamReader(server.getInputStream()));
             System.out.println("sei nella gestione profilo");
+            scrittore.println(p.chatData());  //invio di richiesta dei dati della chat
             scrittore.println(partecipante); //manda il partecipante per ricevere tutte le caratteristiche 
-           // salva();//si deve vedere successivamente
+            salva();//si deve vedere successivamente
             do {
                 System.out.println("premi 1 per creare una nuova room");
                 System.out.println("premi 2 per cercare una room");
@@ -92,19 +93,18 @@ public class GestioneProfilo {
                         for (int i = 0; i < room.size(); i++) {
                             System.out.println(room.get(i).toString());
                         }
+                        break;
                     case 4:
                         System.out.println("inserisci l'id della room");//verra inserito al click della casella
                         RoomID = sc.next();
                         scrittore.println(RoomID);
-                        
+
                         break;
-                        
-                        
-                       
 
                 }
             } while (controllo != 5);
             cancella();
+
         } catch (IOException ex) {
             System.out.println("hai rotto java");
         }
@@ -133,8 +133,13 @@ public class GestioneProfilo {
     }
 
     private void salva() throws IOException {
-        String partecipante;
+        String partecipante, risposta;
         BufferedReader ricevi = new BufferedReader(new InputStreamReader(server.getInputStream()));
+        risposta = ricevi.readLine();
+        if (!risposta.equals("stop")) {
+            nomeRoom = ricevi.readLine();
+            owner = ricevi.readLine();
+        }
 
         partecipante = ricevi.readLine(); //riceve i partecipanti 
 
@@ -160,7 +165,7 @@ public class GestioneProfilo {
     }
 
     private void MandaMessaggio() {
-       
+
         for (int i = 0; i < room.size(); i++) {
             //if () {
 

@@ -28,6 +28,7 @@ public class NuovoClient {
         System.out.println("Apertua connessione");
         Socket server = new Socket("127.0.0.1", 6666);
         Scanner sc = new Scanner(System.in);
+        GestioneProfilo pf = new GestioneProfilo(server);
         int controllo;
         String nome, password, email, codice;
         Utente2 u = new Utente2();
@@ -69,7 +70,6 @@ public class NuovoClient {
                     risposta = ricevi.readLine();
                     System.out.println(risposta);
                     if (risposta.equals("enterAccount")) {
-                        GestioneProfilo pf = new GestioneProfilo(server);
                         pf.gestisci();
                     }
                     break;
