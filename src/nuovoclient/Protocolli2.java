@@ -10,7 +10,8 @@ package nuovoclient;
  * @author agostinelli.luca
  */
 public class Protocolli2 {
-     public String SignUp() {
+
+    public String SignUp() {
         return "signUP";
     }
 
@@ -25,7 +26,11 @@ public class Protocolli2 {
     public String create() {
         return "create";
     }
-  public String Search(){
-      return "search";
-  }
+
+    public String Search() {
+        return "search";
+    }
+
+
+
 }

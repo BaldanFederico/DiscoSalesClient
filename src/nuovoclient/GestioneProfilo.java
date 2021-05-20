@@ -36,7 +36,7 @@ public class GestioneProfilo {
 
     public void gestisci() {
         Utente2 u = new Utente2();
-        protocolli p = new protocolli();
+        Protocolli2 p = new Protocolli2();
 
         Scanner sc = new Scanner(System.in);
         String partecipante;
@@ -48,7 +48,6 @@ public class GestioneProfilo {
             PrintWriter scrittore = new PrintWriter(server.getOutputStream(), true);
             BufferedReader ricevi = new BufferedReader(new InputStreamReader(server.getInputStream()));
             System.out.println("sei nella gestione profilo");
-            scrittore.println(p.chatData());  //invio di richiesta dei dati della chat
             scrittore.println(partecipante); //manda il partecipante per ricevere tutte le caratteristiche 
             salva();//si deve vedere successivamente
             do {
@@ -135,16 +134,21 @@ public class GestioneProfilo {
     private void salva() throws IOException {
         String partecipante, risposta;
         BufferedReader ricevi = new BufferedReader(new InputStreamReader(server.getInputStream()));
+
         risposta = ricevi.readLine();
+
         if (!risposta.equals("stop")) {
+            System.out.println("legg1");
             nomeRoom = ricevi.readLine();
             owner = ricevi.readLine();
+            System.out.println(nomeRoom);
+            System.out.println(owner);
         }
 
         partecipante = ricevi.readLine(); //riceve i partecipanti 
 
         while (!partecipante.equals("stop")) {
-
+            System.out.println("leggi2");
             room.add(new Room(nomeRoom, owner, RoomID, partecipante));
 
             //  if (checkbox == true) {
