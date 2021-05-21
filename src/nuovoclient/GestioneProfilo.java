@@ -48,6 +48,7 @@ public class GestioneProfilo {
             PrintWriter scrittore = new PrintWriter(server.getOutputStream(), true);
             BufferedReader ricevi = new BufferedReader(new InputStreamReader(server.getInputStream()));
             System.out.println("sei nella gestione profilo");
+            scrittore.println("chatData");
             scrittore.println(partecipante); //manda il partecipante per ricevere tutte le caratteristiche 
             salva();//si deve vedere successivamente
             do {
@@ -76,16 +77,17 @@ public class GestioneProfilo {
                         scrittore.println(RoomID);
                         risposta = ricevi.readLine();
                         System.out.println(risposta); //questa room esiste o non
-                        System.out.println("vuoi unirti(scrivi entr)");//verrà automaticamente generata
+                        System.out.println("vuoi unirti(scrivi entr)");//verrà automaticamente generat
                         risposta = sc.next();
                         if (risposta.equals("entr")) {
                             scrittore.println(risposta);//manda la conferma
                             scrittore.println(partecipante);//manda il nome utente
                             nomeRoom = ricevi.readLine();//riceve il nome delle room di appartenenza
                             owner = ricevi.readLine();//riceve il nome dell'owner
-                            room.add(new Room(nomeRoom, owner, RoomID, partecipante));
-                            salva();
+                            salvaSoloUtenti();
+                            //  if (checkbox == true) {
                             writeRoom();
+                            //  }
                         }
                         break;
                     case 3:
@@ -132,49 +134,55 @@ public class GestioneProfilo {
     }
 
     private void salva() throws IOException {
-        String partecipante, risposta;
+        String partecipante;
         BufferedReader ricevi = new BufferedReader(new InputStreamReader(server.getInputStream()));
 
-        risposta = ricevi.readLine();
+        nomeRoom = ricevi.readLine();
 
-        if (!risposta.equals("stop")) {
+        if (!nomeRoom.equals("stop")) {
             System.out.println("legg1");
-            nomeRoom = ricevi.readLine();
             owner = ricevi.readLine();
             System.out.println(nomeRoom);
             System.out.println(owner);
         }
 
+        salvaSoloUtenti();
+    }
+
+    private void salvaSoloUtenti() throws IOException {
+        String partecipante;
+        BufferedReader ricevi = new BufferedReader(new InputStreamReader(server.getInputStream()));
+        PrintWriter scrittore = new PrintWriter(server.getOutputStream(), true);
+
         partecipante = ricevi.readLine(); //riceve i partecipanti 
 
         while (!partecipante.equals("stop")) {
             System.out.println("leggi2");
+            if (owner.equals(partecipante)) {
+                RoomID = ricevi.readLine();
+            }
             room.add(new Room(nomeRoom, owner, RoomID, partecipante));
-
-            //  if (checkbox == true) {
-            writeRoom();
-            //  }
 
             partecipante = ricevi.readLine();
         }
-    }
-
-    private void rimuoviUtente() throws IOException {
-        PrintWriter scrittore = new PrintWriter(server.getOutputStream(), true);
-        for (int i = 0; i < room.size(); i++) {
-            System.out.println(room.get(i).toString());
-        }
-        System.out.println("seleziona l'utente da rimuovere");
+   
 
     }
 
-    private void MandaMessaggio() {
-
-        for (int i = 0; i < room.size(); i++) {
-            //if () {
-
-            //}
-        }
-    }
-
+//    private void rimuoviUtente() throws IOException {
+//        PrintWriter scrittore = new PrintWriter(server.getOutputStream(), true);
+//        for (int i = 0; i < room.size(); i++) {
+//            System.out.println(room.get(i).toString());
+//        }
+//        System.out.println("seleziona l'utente da rimuovere");
+//
+//    }
+//    private void MandaMessaggio() {
+//
+//        for (int i = 0; i < room.size(); i++) {
+//            //if () {
+//
+//            //}
+//        }
+//    }
 }
