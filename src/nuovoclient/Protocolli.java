@@ -7,11 +7,11 @@ package nuovoclient;
 
 /**
  *
- * @author dell
+ * @author agostinelli.luca
  */
 public class Protocolli {
 
-    public String signUp() {
+    public String SignUp() {
         return "signUP";
     }
 
@@ -26,9 +26,8 @@ public class Protocolli {
     public String create() {
         return "create";
     }
-  public String Search(){
-      return "search";
-  }
 
-
+    public String Search() {
+        return "search";
+    }
 }

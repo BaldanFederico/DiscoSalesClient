@@ -5,24 +5,21 @@
  */
 package nuovoclient;
 
-import java.util.Scanner;
-
 /**
  *
- * @author dell
+ * @author agostinelli.luca
  */
 public class Utente {
-   private String nome;
-   private String password;
-   private String Email;
- 
+    private static String nome;
+    private String password;
+    private String Email;
     
-   public String getNome() {
+    public String getNome() {
         return nome;
     }
 
     public String getPassword() {
-       
+
         return password;
     }
 
@@ -41,8 +38,4 @@ public class Utente {
     public void setEmail(String Email) {
         this.Email = Email;
     }
-   
-
-
-
 }
