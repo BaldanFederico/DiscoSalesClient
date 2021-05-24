@@ -36,8 +36,8 @@ public class GestioneProfilo {
 
     public void gestisci() {
 
-        utente u = new utente();
-        protocolli p = new protocolli();
+        utente2 u = new utente2();
+        protocolli2 p = new protocolli2();
 
         Scanner sc = new Scanner(System.in);
         String partecipante;
@@ -156,8 +156,9 @@ public class GestioneProfilo {
         BufferedReader ricevi = new BufferedReader(new InputStreamReader(server.getInputStream()));
 
         RoomID = ricevi.readLine();
+        
         System.out.println("roomID" + RoomID);
-        //    while (!RoomID.equals("stop")) {
+         if(!RoomID.equals("stop")) {
         owner = ricevi.readLine();
         System.out.println("owner" + owner);
         nomeRoom = ricevi.readLine();
@@ -167,7 +168,7 @@ public class GestioneProfilo {
         //   System.out.println("RoomID"+RoomID);
         //  }
     }
-
+   }
     private void salvaSoloUtenti() throws IOException {
         String partecipante;
         BufferedReader ricevi = new BufferedReader(new InputStreamReader(server.getInputStream()));
