@@ -49,12 +49,8 @@ public class GestioneProfilo {
             BufferedReader ricevi = new BufferedReader(new InputStreamReader(server.getInputStream()));
             System.out.println("sei nella gestione profilo");
             scrittore.println("chatData");
-            int l = ricevi.read();
-            System.out.println(l);
             scrittore.println(partecipante); //manda il partecipante per ricevere tutte le caratteristiche 
-            for (int i = 0; i < 4; i++) {
-                salva();
-            }
+            salva();
 
             do {
 
@@ -149,17 +145,18 @@ public class GestioneProfilo {
     }
 
     private void salva() throws IOException {
-        String partecipante;
         BufferedReader ricevi = new BufferedReader(new InputStreamReader(server.getInputStream()));
-
+        //  for (int i = 0; i < 4; i++) {
         RoomID = ricevi.readLine();
+        System.out.println("passa");
         while (!"stop".equals(RoomID)) {
             owner = ricevi.readLine();
             nomeRoom = ricevi.readLine();
             salvaSoloUtenti();
-
+            RoomID = ricevi.readLine();
+            System.out.println("passa4");
         }
-
+        //  }
     }
 
     private void salvaSoloUtenti() throws IOException {
@@ -174,8 +171,9 @@ public class GestioneProfilo {
             room.add(new Room(nomeRoom, owner, RoomID, partecipante));
 
             partecipante = ricevi.readLine();
+            System.out.println("passa2");
         }
-
+        System.out.println("passa3");
     }
 
 //    private void rimuoviUtente() throws IOException {
