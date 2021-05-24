@@ -31,8 +31,8 @@ public class NuovoClient {
         GestioneProfilo pf = new GestioneProfilo(server);
         int controllo;
         String nome, password, email, codice;
-        Utente2 u = new Utente2();
-        Protocolli2 p = new Protocolli2();
+        Utente u = new Utente();
+        Protocolli p = new Protocolli();
         PrintWriter scrittore = new PrintWriter(server.getOutputStream(), true);
         BufferedReader ricevi = new BufferedReader(new InputStreamReader(server.getInputStream()));
         String risposta;

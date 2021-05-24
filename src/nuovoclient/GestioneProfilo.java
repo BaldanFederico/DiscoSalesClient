@@ -35,8 +35,8 @@ public class GestioneProfilo {
     }
 
     public void gestisci() {
-        Utente2 u = new Utente2();
-        Protocolli2 p = new Protocolli2();
+        Utente u = new Utente();
+        Protocolli p = new Protocolli();
 
         Scanner sc = new Scanner(System.in);
         String partecipante;
