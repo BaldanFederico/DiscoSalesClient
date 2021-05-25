@@ -58,11 +58,12 @@ public class GestioneProfilo {
                 //parte di refresh 
                 //controllo arrivo di messaggi
                 //controllo di essere stato rimosso da una room
-                riceviMessaggio();
+              //  riceviMessaggio();
                 System.out.println("premi 1 per creare una nuova room");
                 System.out.println("premi 2 per cercare una room");
                 System.out.println("premi 3 visualizza la room  con i partecipanti");
                 System.out.println("premi 4 per abbandonare la room");
+                System.out.println("premi 5  scrivere un messaggio nella room");
                 controllo = sc.nextInt();
 
                 switch (controllo) {
@@ -119,6 +120,8 @@ public class GestioneProfilo {
                         scrittore.println(RoomID = room.get(0).getRoomID());
                         scrittore.println(risposta);
                         scrittore.println(partecipante);
+                        risposta=ricevi.readLine();
+                        System.out.println(risposta);
                 }
             } while (controllo != 6);
             cancella();
@@ -195,16 +198,15 @@ public class GestioneProfilo {
 //    }
     private void riceviMessaggio() throws IOException {
         String messaggio;
-       
+          
         BufferedReader ricevi = new BufferedReader(new InputStreamReader(server.getInputStream()));
-       
-        messaggio=ricevi.readLine();
-        
-        for (int i = 0; i < room.size(); i++) {
-            //if () {
 
-            //}
+        messaggio = ricevi.readLine();
+        if(!"stop".equals(messaggio)){
+          System.out.println(messaggio);   
         }
+       
+        
     }
 
     private void rimuoviRoom() {
