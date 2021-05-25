@@ -10,7 +10,7 @@ package nuovoclient;
  * @author dell
  */
 public class utente2 {
-    private String nome;
+    private static String nome;
    private String password;
    private String Email;
  

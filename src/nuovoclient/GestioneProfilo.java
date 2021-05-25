@@ -58,7 +58,7 @@ public class GestioneProfilo {
                 //parte di refresh 
                 //controllo arrivo di messaggi
                 //controllo di essere stato rimosso da una room
-
+                riceviMessaggio();
                 System.out.println("premi 1 per creare una nuova room");
                 System.out.println("premi 2 per cercare una room");
                 System.out.println("premi 3 visualizza la room  con i partecipanti");
@@ -105,7 +105,7 @@ public class GestioneProfilo {
                         }
                         break;
                     case 4:
-                       //manda il protocollo al server
+                        //manda il protocollo al server
                         //si fa rimuovere 
                         for (int i = 0; i < room.size(); i++) {
                             room.remove(i);
@@ -116,11 +116,9 @@ public class GestioneProfilo {
                         scrittore.println("chat");
                         System.out.println("inserisci il messaggio da inviare");//verra inserito al click della casella
                         risposta = sc.next();
-                        System.out.println("inserisci l'id della room che verrà inserito con la grafica");//verra inserito al click della casella
-                        RoomID = sc.next();
-                        scrittore.println(RoomID);
+                        scrittore.println(RoomID = room.get(0).getRoomID());
                         scrittore.println(risposta);
-
+                        scrittore.println(partecipante);
                 }
             } while (controllo != 6);
             cancella();
@@ -154,21 +152,22 @@ public class GestioneProfilo {
 
     private void salva() throws IOException {
         BufferedReader ricevi = new BufferedReader(new InputStreamReader(server.getInputStream()));
+        String risposta = ricevi.readLine();
 
-        RoomID = ricevi.readLine();
-        
         System.out.println("roomID" + RoomID);
-         if(!RoomID.equals("stop")) {
-        owner = ricevi.readLine();
-        System.out.println("owner" + owner);
-        nomeRoom = ricevi.readLine();
-        System.out.println(nomeRoom);
-        salvaSoloUtenti();
+        if (!risposta.equals("stop")) {
+            RoomID = risposta;
+            owner = ricevi.readLine();
+            System.out.println("owner" + owner);
+            nomeRoom = ricevi.readLine();
+            System.out.println(nomeRoom);
+            salvaSoloUtenti();
 
-        //   System.out.println("RoomID"+RoomID);
-        //  }
+            //   System.out.println("RoomID"+RoomID);
+            //  }
+        }
     }
-   }
+
     private void salvaSoloUtenti() throws IOException {
         String partecipante;
         BufferedReader ricevi = new BufferedReader(new InputStreamReader(server.getInputStream()));
@@ -195,7 +194,12 @@ public class GestioneProfilo {
 //
 //    }
     private void riceviMessaggio() throws IOException {
+        String messaggio;
+       
         BufferedReader ricevi = new BufferedReader(new InputStreamReader(server.getInputStream()));
+       
+        messaggio=ricevi.readLine();
+        
         for (int i = 0; i < room.size(); i++) {
             //if () {
 
