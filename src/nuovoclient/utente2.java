@@ -10,17 +10,17 @@ package nuovoclient;
  * @author dell
  */
 public class utente2 {
+
     private static String nome;
-   private String password;
-   private String Email;
- 
-    
-   public String getNome() {
+    private String password;
+    private String Email;
+
+    public String getNome() {
         return nome;
     }
 
     public String getPassword() {
-       
+
         return password;
     }
 
@@ -39,6 +39,5 @@ public class utente2 {
     public void setEmail(String Email) {
         this.Email = Email;
     }
-   
-   
+
 }
