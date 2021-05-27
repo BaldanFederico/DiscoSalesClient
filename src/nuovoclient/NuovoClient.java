@@ -13,13 +13,43 @@ import java.util.*;
 import java.io.*;
 import java.net.*;
 import java.util.*;
+import javafx.application.Application;
+import javafx.stage.Stage;
+import scenes.Activation;
+import scenes.Friends;
+import scenes.Login;
+import scenes.SaveAccount;
+import scenes.Upload;
 
 
 /**
  *
  * @author dell
  */
-public class NuovoClient {
+public class NuovoClient extends Application {
+    private Login login;
+    private Activation activation;
+    private SaveAccount saveAccount;
+    private Upload upload;
+    private Friends main;
+    
+    
+    @Override
+    public void start(Stage primaryStage) throws Exception {
+        login = new Login(stage);
+        activation = new Activation(stage);
+        saveAccount = new SaveAccount(stage);
+        main = new Friends(stage);
+        
+        login.setScenes(activation.getScene(), saveAccount.getScene(), upload.getScene(), main.getScene());
+        activation.setScenes(login.getScene(),upload.getScene(), main.getScene());
+        saveAccount.setScene(login.getScene());
+        
+        stage.setTitle("Login");
+        stage.setScene(login.getScene());
+        stage.show();  
+    }
+    
 
     /**
      * @param args the command line arguments
