@@ -178,6 +178,7 @@ public class Login {
         this.activation = activation;
         this.saveAccount = saveAccount;
         this.upload = upload;
+        this.main = main;
     }
     
     public Scene getScene(){

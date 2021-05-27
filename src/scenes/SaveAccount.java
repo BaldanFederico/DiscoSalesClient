@@ -60,10 +60,10 @@ public class SaveAccount {
         arrow.setFont(new Font("System Bold", 16));
         VBox.setMargin(arrow, new Insets(-120,360,0,0));
         arrow.setOnMouseClicked(new EventHandler<MouseEvent>() {
-             @Override
-             public void handle(MouseEvent event){
-                 System.out.println("Login");
-             }
+            @Override
+            public void handle(MouseEvent event){
+                System.out.println("Login");
+            }
         });
         Label d1 = new Label("Insert your e-mail address in order to save your account");
         d1.setTextAlignment(TextAlignment.CENTER);

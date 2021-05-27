@@ -8,18 +8,9 @@ package nuovoclient;
 import java.io.*;
 import java.net.*;
 import java.util.*;
-
-
-import java.io.*;
-import java.net.*;
-import java.util.*;
 import javafx.application.Application;
 import javafx.stage.Stage;
-import scenes.Activation;
-import scenes.Friends;
-import scenes.Login;
-import scenes.SaveAccount;
-import scenes.Upload;
+import scenes.*;
 
 
 /**
@@ -40,6 +31,7 @@ public class NuovoClient extends Application {
         activation = new Activation(stage);
         saveAccount = new SaveAccount(stage);
         main = new Friends(stage);
+        upload = new Upload(stage);
         
         login.setScenes(activation.getScene(), saveAccount.getScene(), upload.getScene(), main.getScene());
         activation.setScenes(login.getScene(),upload.getScene(), main.getScene());

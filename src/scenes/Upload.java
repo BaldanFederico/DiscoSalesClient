@@ -20,15 +20,16 @@ import static jdk.nashorn.internal.objects.Global.Infinity;
 public class Upload {
     private Stage stage;
     private Scene upload;
+    private StackPane middle;
 
     public Upload(Stage stage) {
         this.stage = stage;
         start();
-        
+        upload = new Scene(middle);
     }
     
     private void start() {
-        StackPane middle = new StackPane();
+        middle = new StackPane();
         middle.setMaxSize(-Infinity, -Infinity);
         middle.setMinSize(-Infinity, -Infinity);
         middle.setPrefSize(600, 400);
@@ -54,7 +55,6 @@ public class Upload {
         
         stage.setTitle("DiscoSales - Updating...");
         stage.setScene(upload);
-        stage.show();
     }
     
     public Scene getScene(){
