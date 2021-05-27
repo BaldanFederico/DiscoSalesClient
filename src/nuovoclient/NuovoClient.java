@@ -54,7 +54,7 @@ public class NuovoClient extends Application {
         GestioneProfilo pf = new GestioneProfilo(server);
         int controllo;
         String nome, password, email, codice;
-        Utente u = new Utente();
+        utente u = new utente();
         Protocollo p = new Protocollo();
         PrintWriter scrittore = new PrintWriter(server.getOutputStream(), true);
         BufferedReader ricevi = new BufferedReader(new InputStreamReader(server.getInputStream()));

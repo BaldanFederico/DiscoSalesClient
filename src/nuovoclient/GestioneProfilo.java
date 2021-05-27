@@ -36,9 +36,9 @@ public class GestioneProfilo {
 
     public void gestisci() {
 
-        Utente u = new Utente();
+        utente u = new utente();
         Protocollo p = new Protocollo();
-    //    Thread Gm = new Thread(new riceviMessaggi(server));
+        //    Thread Gm = new Thread(new riceviMessaggi(server));
         Scanner sc = new Scanner(System.in);
         String partecipante;
         partecipante = u.getNome();
@@ -54,8 +54,8 @@ public class GestioneProfilo {
             salva();
 
             do {
-                 
-                 //parte di refresh 
+
+                //parte di refresh 
                 //controllo arrivo di messaggi
                 //controllo di essere stato rimosso da una room
                 //  riceviMessaggio();
@@ -98,9 +98,7 @@ public class GestioneProfilo {
                             salvaSoloUtenti();
                             //  if (checkbox == true) {
                             writeRoom();
-                            
-                          //  }
-                        //Gm.run();
+
                         }
                         break;
                     case 3:
@@ -109,8 +107,8 @@ public class GestioneProfilo {
                         }
                         break;
                     case 4:
-                        //manda il protocollo al server
-                        //si fa rimuovere 
+                        scrittore.println("remove"); //manda il protocollo al server
+                        scrittore.println(partecipante);
                         for (int i = 0; i < room.size(); i++) {
                             room.remove(i);
                         }
@@ -200,7 +198,4 @@ public class GestioneProfilo {
 //        System.out.println("seleziona l'utente da rimuovere");
 //
 //    }
-    private void rimuoviRoom() {
-
-    }
 }
