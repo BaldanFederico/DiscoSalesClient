@@ -36,8 +36,8 @@ public class GestioneProfilo {
 
     public void gestisci() {
 
-        utente2 u = new utente2();
-        protocolli2 p = new protocolli2();
+        Utente u = new Utente();
+        Protocollo p = new Protocollo();
     //    Thread Gm = new Thread(new riceviMessaggi(server));
         Scanner sc = new Scanner(System.in);
         String partecipante;
