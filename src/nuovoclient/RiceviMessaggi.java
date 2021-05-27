@@ -5,19 +5,15 @@
  */
 package nuovoclient;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
+import java.io.*;
 import java.net.Socket;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import java.util.logging.*;
 
 /**
  *
  * @author agostinelli.luca
  */
 public class RiceviMessaggi implements Runnable {
-
     Socket server;
 
     public RiceviMessaggi(Socket server) {
@@ -27,7 +23,6 @@ public class RiceviMessaggi implements Runnable {
     @Override
     public void run() {
         String messaggio;
-
         BufferedReader ricevi;
         try {
             ricevi = new BufferedReader(new InputStreamReader(server.getInputStream()));
