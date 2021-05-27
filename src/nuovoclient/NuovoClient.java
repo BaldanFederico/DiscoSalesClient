@@ -35,7 +35,7 @@ public class NuovoClient extends Application {
     
     
     @Override
-    public void start(Stage primaryStage) throws Exception {
+    public void start(Stage stage) throws Exception {
         login = new Login(stage);
         activation = new Activation(stage);
         saveAccount = new SaveAccount(stage);
@@ -55,7 +55,8 @@ public class NuovoClient extends Application {
      * @param args the command line arguments
      */
     public static void main(String[] args) throws IOException {
-        System.out.println("Apertua connessione");
+        //launch();
+        System.out.println("Apertura connessione");
         Socket server = new Socket("127.0.0.1", 6666);
         Scanner sc = new Scanner(System.in);
         GestioneProfilo pf = new GestioneProfilo(server);
