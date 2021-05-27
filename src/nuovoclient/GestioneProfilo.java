@@ -38,7 +38,7 @@ public class GestioneProfilo {
 
         utente2 u = new utente2();
         protocolli2 p = new protocolli2();
-
+    //    Thread Gm = new Thread(new riceviMessaggi(server));
         Scanner sc = new Scanner(System.in);
         String partecipante;
         partecipante = u.getNome();
@@ -51,11 +51,11 @@ public class GestioneProfilo {
             System.out.println("sei nella gestione profilo");
             scrittore.println("chatData");
             scrittore.println(partecipante); //manda il partecipante per ricevere tutte le caratteristiche 
-
             salva();
 
             do {
-                //parte di refresh 
+                 
+                 //parte di refresh 
                 //controllo arrivo di messaggi
                 //controllo di essere stato rimosso da una room
                 //  riceviMessaggio();
@@ -98,7 +98,9 @@ public class GestioneProfilo {
                             salvaSoloUtenti();
                             //  if (checkbox == true) {
                             writeRoom();
-                            //  }
+                            
+                          //  }
+                        //Gm.run();
                         }
                         break;
                     case 3:
@@ -198,18 +200,6 @@ public class GestioneProfilo {
 //        System.out.println("seleziona l'utente da rimuovere");
 //
 //    }
-    private void riceviMessaggio() throws IOException {
-        String messaggio;
-
-        BufferedReader ricevi = new BufferedReader(new InputStreamReader(server.getInputStream()));
-
-        messaggio = ricevi.readLine();
-        if (!"stop".equals(messaggio)) {
-            System.out.println(messaggio);
-        }
-
-    }
-
     private void rimuoviRoom() {
 
     }
