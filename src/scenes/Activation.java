@@ -47,7 +47,7 @@ public class Activation {
         StackPane s1 = new StackPane();
         s1.setPrefSize(393.0, 600.0);
         s1.setStyle("-fx-background-color: #393E46");
-        ImageView image = new ImageView("file:/NetBeansProjects/JavaFXApplication11/DSLogo.png");
+        ImageView image = new ImageView("file:/DSLogo.png");
         image.setFitHeight(348.0);
         image.setFitWidth(373.0);
         image.setPreserveRatio(true);

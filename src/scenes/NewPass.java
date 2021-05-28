@@ -7,33 +7,32 @@ package scenes;
 
 import javafx.event.*;
 import javafx.geometry.*;
-import javafx.scene.*;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.image.*;
 import javafx.scene.input.*;
 import javafx.scene.layout.*;
-import javafx.scene.paint.*;
+import javafx.scene.paint.Color;
 import javafx.scene.text.*;
-import javafx.stage.*;
+import javafx.stage.Stage;
 import static jdk.nashorn.internal.objects.Global.Infinity;
 
 /**
  *
  * @author manue
  */
-public class SaveAccount {
-    private HBox root;
+public class NewPass {
     private Stage stage;
-    private Scene saveAccount, login;
+    private Scene newPass, saveAccount, login;
+    private HBox root;
 
-    public SaveAccount(Stage stage) {
+    public NewPass(Stage stage) {
         this.stage = stage;
         start();
-        saveAccount = new Scene(root);
+        newPass = new Scene(root);
     }
     
-    
-    private void start() {
+    public void start() {
         root = new HBox();
         
         /**
@@ -56,16 +55,17 @@ public class SaveAccount {
         VBox datas = new VBox();
         datas.setAlignment(Pos.CENTER);
         StackPane.setAlignment(datas, Pos.CENTER);
-        Label arrow = new Label("<- Login");
+        Label arrow = new Label("<- I don't want to change password");
         arrow.setFont(new Font("System Bold", 16));
         VBox.setMargin(arrow, new Insets(-120,360,0,0));
         arrow.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event){
-                System.out.println("Login");
+                stage.setScene(saveAccount);
+                stage.show();
             }
         });
-        Label d1 = new Label("Insert your e-mail address in order to save your account");
+        Label d1 = new Label("Insert your new password");
         d1.setTextAlignment(TextAlignment.CENTER);
         d1.setTextFill(Color.web("#393E46"));
         d1.setWrapText(true);
@@ -74,16 +74,23 @@ public class SaveAccount {
         d1.setPrefSize(400, 77);
         d1.setFont(new Font("System Italic", 21));
         VBox.setMargin(d1, new Insets(90,0,0,0));
-        Label d2 = new Label("You will be sent an e-mail. If you are not registered a DiscoSales acount, the e-mail will not be sent");
-        d2.setTextAlignment(TextAlignment.CENTER);
-        d2.setTextFill(Color.web("#393E46"));
-        d2.setWrapText(true);
-        d2.setAlignment(Pos.CENTER);
-        d2.setMaxSize(400, 300);
-        d2.setPrefSize(390, 66);
-        d2.setFont(new Font("System Italic", 12));
-        Label errEmail = new Label("WRONG Username AND/OR Password");
-        errEmail.setTextFill(Color.RED);
+        Label errPass = new Label("These passwords don't correspond");
+        errPass.setTextFill(Color.TRANSPARENT);
+        HBox text1 = new HBox(2);
+        text1.setAlignment(Pos.CENTER);
+        text1.setPrefSize(600, 57);
+        text1.setSpacing(15);
+        Label u = new Label("Username : ");
+        u.setTextFill(Color.web("#393E46"));
+        u.setFont(new Font("Verdana", 14));
+        PasswordField passFld = new PasswordField();
+        passFld.setPromptText("username");
+        passFld.setMaxWidth(300);
+        passFld.setPrefSize(172, 25);
+        passFld.setFont(new Font("System",14));
+        passFld.setStyle("-fx-background-color: transparent; -fx-border-width: 0px 0px 2px 0px; -fx-border-color: #00ADB5;");
+        text1.getChildren().addAll(u,passFld);
+        VBox.setMargin(text1, new Insets(0,0,0,0));
         HBox text = new HBox(2);
         text.setAlignment(Pos.CENTER);
         text.setPrefSize(600, 57);
@@ -91,40 +98,56 @@ public class SaveAccount {
         Label e = new Label("Email : ");
         e.setTextFill(Color.web("#393E46"));
         e.setFont(new Font("Verdana", 14));
-        TextField emailFld = new TextField();
-        emailFld.setPromptText("user@example.com");
-        emailFld.setMaxWidth(300);
-        emailFld.setPrefSize(172, 25);
-        emailFld.setFont(new Font("System",14));
-        emailFld.setStyle("-fx-background-color: transparent; -fx-border-width: 0px 0px 2px 0px; -fx-border-color: #00ADB5;");
-        text.getChildren().addAll(e,emailFld);
+        PasswordField confFld = new PasswordField();
+        confFld.setPromptText("user@example.com");
+        confFld.setMaxWidth(300);
+        confFld.setPrefSize(172, 25);
+        confFld.setFont(new Font("System",14));
+        confFld.setStyle("-fx-background-color: transparent; -fx-border-width: 0px 0px 2px 0px; -fx-border-color: #00ADB5;");
+        text.getChildren().addAll(e,confFld);
         VBox.setMargin(text, new Insets(0,0,30,0));
-        Button saveBtn = new Button("Send e-mail");
+        Button saveBtn = new Button("Change password");
         saveBtn.setTextFill(Color.WHITE);
         saveBtn.setStyle("-fx-background-color: #00ADB5;");
         saveBtn.setPrefSize(107,29);
         saveBtn.setFont(new Font("System", 13));
-        VBox.setMargin(emailFld, new Insets(13,0,0,0));
+        VBox.setMargin(confFld, new Insets(13,0,0,0));
         saveBtn.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event){
-                
+                errPass.setTextFill(Color.TRANSPARENT);
+                errPass.setText("These passwords don't correspond");
+                if (passFld.getText().equals(confFld.getText())) {
+                    errPass.setText("You must not use a password already used");
+                    if (true) {
+                        stage.setScene(login);
+                        stage.show();
+                    } else {
+                        errPass.setTextFill(Color.RED);
+                    }
+                } else {
+                    errPass.setTextFill(Color.RED);
+                }
             }
         });
-        datas.getChildren().addAll(arrow,d1,d2,errEmail,text,saveBtn);
+        datas.getChildren().addAll(arrow,d1,errPass,text1,text,saveBtn);
         datas.setPadding(new Insets(0,36,0,36));
         s2.getChildren().add(datas);
         root.getChildren().addAll(s1,s2);
         
         stage.setScene(saveAccount);
         stage.setTitle("Save account");
+        stage.show();
     }
+
     
-    public void setScene(Scene login){
+    public void setScenes(Scene login, Scene saveAccount) {
         this.login = login;
+        this.saveAccount = saveAccount;
     }
     
     public Scene getScene(){
-        return saveAccount;
+        return newPass;
     }
+    
 }
