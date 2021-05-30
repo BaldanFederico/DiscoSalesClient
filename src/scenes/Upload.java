@@ -15,7 +15,7 @@ import static jdk.nashorn.internal.objects.Global.Infinity;
 
 /**
  *
- * @author manue
+ * @author DiscoSales
  */
 public class Upload {
     private Stage stage;

@@ -27,7 +27,7 @@ import javafx.stage.Stage;
 
 /**
  *
- * @author manue
+ * @author DiscoSales
  */
 public class Activation {
     private Stage stage;

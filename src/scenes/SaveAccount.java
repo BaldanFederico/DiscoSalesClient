@@ -19,7 +19,7 @@ import static jdk.nashorn.internal.objects.Global.Infinity;
 
 /**
  *
- * @author manue
+ * @author DiscoSales
  */
 public class SaveAccount {
     private HBox root;

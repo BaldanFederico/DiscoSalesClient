@@ -17,8 +17,9 @@ import java.util.Scanner;
 import java.util.Vector;
 
 /**
- *
- * @author agostinelli.luca
+ * La classe è il gestore del profilo client e di tutte le chatroom che sono collegate al profilo di ogni singolo utente.
+ * Inoltre comunica con il server dopo che l'utente ha avuto accesso all'applicazione.
+ * @author DiscoSales
  */
 public class GestioneProfilo {
 
@@ -28,12 +29,17 @@ public class GestioneProfilo {
     private String owner;
     private String nomeRoom, RoomID;
     File f;
-
+/**
+ * Il costruttore istanzia l'oggetto GestioneProfilo che mette al suo interno la socket
+ * @param server la socket che comunica con il server 
+ */
     public GestioneProfilo(Socket server) {
         this.server = server;
 
     }
-
+/**
+ * Il metodo gestisce le comunicazioni con il server attraverso un protoccolo proprietario a seconda dei comandi inseriti nella console
+ */
     public void gestisci() {
 
         utente u = new utente();
@@ -50,15 +56,15 @@ public class GestioneProfilo {
             BufferedReader ricevi = new BufferedReader(new InputStreamReader(server.getInputStream()));
             System.out.println("sei nella gestione profilo");
             scrittore.println("chatData");
-            scrittore.println(partecipante); //manda il partecipante per ricevere tutte le caratteristiche 
+            scrittore.println(partecipante); //Manda il partecipante per ricevere tutte le caratteristiche 
             salva();
 
             do {
 
-                //parte di refresh 
-                //controllo arrivo di messaggi
-                //controllo di essere stato rimosso da una room
-                //  riceviMessaggio();
+                //Parte di refresh 
+                //Controllo arrivo di messaggi
+                //Controllo di essere stato rimosso da una room
+                //RiceviMessaggio();
                 System.out.println("premi 1 per creare una nuova room");
                 System.out.println("premi 2 per cercare una room");
                 System.out.println("premi 3 visualizza la room  con i partecipanti");
@@ -87,14 +93,14 @@ public class GestioneProfilo {
                         RoomID = sc.next();
                         scrittore.println(RoomID);
                         risposta = ricevi.readLine();
-                        System.out.println(risposta); //questa room esiste o non
-                        System.out.println("vuoi unirti(scrivi entr)");//verrà automaticamente generat
+                        System.out.println(risposta); //Questa room esiste o non
+                        System.out.println("vuoi unirti(scrivi entr)");//Verrà automaticamente generat
                         risposta = sc.next();
                         if (risposta.equals("entr")) {
-                            scrittore.println(risposta);//manda la conferma
-                            scrittore.println(partecipante);//manda il nome utente
-                            nomeRoom = ricevi.readLine();//riceve il nome delle room di appartenenza
-                            owner = ricevi.readLine();//riceve il nome dell'owner
+                            scrittore.println(risposta);//Manda la conferma
+                            scrittore.println(partecipante);//Manda il nome utente
+                            nomeRoom = ricevi.readLine();//Riceve il nome delle room di appartenenza
+                            owner = ricevi.readLine();//Riceve il nome dell'owner
                             salvaSoloUtenti();
                             //  if (checkbox == true) {
                             writeRoom();
@@ -107,7 +113,7 @@ public class GestioneProfilo {
                         }
                         break;
                     case 4:
-                        scrittore.println("remove"); //manda il protocollo al server
+                        scrittore.println("remove"); //Manda il protocollo al server
                         scrittore.println(partecipante);
                         for (int i = 0; i < room.size(); i++) {
                             room.remove(i);
@@ -117,7 +123,7 @@ public class GestioneProfilo {
                     case 5:
 
                         scrittore.println("chat");
-                        System.out.println("inserisci il messaggio da inviare");//verra inserito al click della casella
+                        System.out.println("inserisci il messaggio da inviare");//Verrà inserito al click della casella
                         risposta = sc.next();
                         scrittore.println(RoomID = room.get(0).getRoomID());
                         scrittore.println(risposta);
@@ -132,8 +138,12 @@ public class GestioneProfilo {
             System.out.println("hai rotto java");
         }
     }
-
-    private void writeRoom() throws IOException {  //serve tenere traccia dei vari delle room
+/**
+ *  Serve tenere traccia delle varie delle room
+ * @throws IOException  Eccezione che viene gestita tramite ,appunto, il "throws IOException"
+ * 
+ */
+    private void writeRoom() throws IOException { 
 
         f = new File("C:\\Users\\" + userName + "\\Desktop\\Room.txt");
         f.createNewFile();
@@ -149,12 +159,18 @@ public class GestioneProfilo {
         }
         bw.close();
     }
-
+/**
+ * Il metodo cancella i file delle chatroom
+ */
     private void cancella() {
         f = new File("C:\\Users\\" + userName + "\\Desktop\\Room.txt");
         f.delete();
     }
-
+/**
+ * Il metodo salva i dati della chatroom.
+ * Nel caso il server manda il comando "stop", il client non salverà i dati della chatroom.
+ * @throws IOException Eccezione che viene gestita tramite ,appunto, il "throws IOException"
+ */
     private void salva() throws IOException {
         BufferedReader ricevi = new BufferedReader(new InputStreamReader(server.getInputStream()));
         String risposta = ricevi.readLine();
@@ -172,12 +188,15 @@ public class GestioneProfilo {
             //  }
         }
     }
-
+/**
+ * Il metodo salva i dati degli utenti scritti nella chatroom, qualora la chatroom non avesse membri o non è possibile accedere a quei dati, il client riceve il comando stop e non riceve alcun dato riguardo ai partecipanti.
+ * @throws IOException Eccezione che viene gestita tramite ,appunto, il "throws IOException"
+ */
     private void salvaSoloUtenti() throws IOException {
         String partecipante;
         BufferedReader ricevi = new BufferedReader(new InputStreamReader(server.getInputStream()));
 
-        partecipante = ricevi.readLine(); //riceve i partecipanti 
+        partecipante = ricevi.readLine(); //Riceve i partecipanti 
 
         while (!partecipante.equals("stop")) {
             System.out.println(partecipante);

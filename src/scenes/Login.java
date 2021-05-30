@@ -19,7 +19,7 @@ import javafx.stage.Stage;
 
 /**
  *
- * @author manue
+ * @author DiscoSales
  */
 public class Login {
     private Scene login, activation, saveAccount, upload, main;

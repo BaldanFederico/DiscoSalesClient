@@ -15,12 +15,12 @@ import javafx.scene.layout.*;
 import javafx.scene.paint.*;
 import javafx.scene.shape.*;
 import javafx.scene.text.*;
-import javafx.stage.Stage;
+import javafx.stage.Stage; 
 import static jdk.nashorn.internal.objects.Global.Infinity;
 
 /**
  *
- * @author manue
+ * @author DiscoSales
  */
 public class Friends {
     private Stage stage;

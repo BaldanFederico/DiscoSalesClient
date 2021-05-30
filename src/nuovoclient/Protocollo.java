@@ -6,8 +6,9 @@
 package nuovoclient;
 
 /**
- *
- * @author dell
+ * La classe gestisce le iterazioni fra client e server con una serie di codici chiamati: Protocollo.
+ * Il protocollo regola la sintassi delle comunicazioni
+ * @author DiscoSales
  */
 public class Protocollo {
         public String SignUp() {

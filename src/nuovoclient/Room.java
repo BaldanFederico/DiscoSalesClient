@@ -6,14 +6,14 @@
 package nuovoclient;
 
 /**
- *
- * @author dell
+ * La classe che gestisce i dati della chatroom con cui l'utente è iscritto.
+ * @author DiscoSales
  */
 public class Room {
 
     private String nomeRoom;
-    private String owner;//un id univoco per ogni utente
-    private String roomID; //un id univoco per la room
+    private String owner;//Un id univoco per ogni utente
+    private String roomID; //Un id univoco per la room
     private String partecipante;
 
     public Room(String nomeRoom, String owner, String RoomID, String partecipante) {
@@ -38,7 +38,10 @@ public class Room {
     public String getPartecipante() {
         return partecipante;
     }
-
+/**
+ * Il metodo che ritorna i dati della chatroom
+ * @return Una stringa che contiene i dati della relativa chatroom
+ */
     @Override
     public String toString() {
         return "Room{" + "nomeRoom=" + nomeRoom + ", owner=" + owner + ", roomID=" + roomID + ", partecipante=" + partecipante + '}';

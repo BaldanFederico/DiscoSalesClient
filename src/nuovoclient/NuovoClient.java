@@ -14,8 +14,9 @@ import scenes.*;
 
 
 /**
- *
- * @author dell
+ *La classe "NuovoClient" gestisce la connettività delle comunicazioni client e server.
+ * Inoltre instanzia le classi che gestiscono le interfacce ed i gestori: Utente e Chatroom.
+ * @author DiscoSales
  */
 public class NuovoClient extends Application {
     private Login login;
@@ -23,7 +24,12 @@ public class NuovoClient extends Application {
     private SaveAccount saveAccount;
     private Upload upload;
     private Friends main;
-    
+/**
+ * Il metodo inizializza le interfacce grafiche salvate su apposite classi.
+ * Le interfacce sono sincronizzate tra loro a seconda dei comandi inseriti nelle classi.
+ * @param stage Il parametro è una classe "stage" che serve a mostrare a video le interfacce.
+ * @throws Exception Eccezione che viene gestita tramite ,appunto, il "throws Exception"
+ */    
     
     @Override
     public void start(Stage stage) throws Exception {
@@ -44,7 +50,10 @@ public class NuovoClient extends Application {
     
 
     /**
-     * @param args the command line arguments
+     * Il main è il metodo principale che viene eseguito per primo e gestisce la connessione fra client e server.
+     * La connessione è volta a conoscere se l'utente, che vuole collegarsi al server, sia un iscritto ad un profilo o un nuovo utente.
+     * @param args Gli argomenti delle linee di comando
+     * @throws java.io.IOException
      */
     public static void main(String[] args) throws IOException {
         //launch();
